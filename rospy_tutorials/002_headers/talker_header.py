@@ -49,7 +49,7 @@ def talker_header():
     rospy.init_node(NAME) #blocks until registered with master
     count = 0
     while not rospy.is_shutdown():
-        str = 'hello world %s'%count
+        str = f'hello world {count}'
         print(str)
         # If None is used as the header value, rospy will automatically
         # fill it in.

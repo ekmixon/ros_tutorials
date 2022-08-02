@@ -49,7 +49,7 @@ class TestTalkerListener(unittest.TestCase):
         self.success = False
         
     def callback(self, data):
-        print(rospy.get_caller_id(), "I heard %s"%data.data)
+        print(rospy.get_caller_id(), f"I heard {data.data}")
         self.success = data.data and data.data.startswith('hello world')
 
     def test_talker_listener(self):

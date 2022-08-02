@@ -44,17 +44,17 @@ from std_msgs.msg import String
 
 class ChatterListener(rospy.SubscribeListener):
     def peer_subscribe(self, topic_name, topic_publish, peer_publish):
-        print("a peer subscribed to topic [%s]" % topic_name)
-        
+        print(f"a peer subscribed to topic [{topic_name}]")
+
         str = "Hey everyone, we have a new friend!"
         print(str)
         topic_publish(String(str))
-        str = "greetings. welcome to topic "+topic_name
+        str = f"greetings. welcome to topic {topic_name}"
         print(str)
         peer_publish(String(str))
         
     def peer_unsubscribe(self, topic_name, numPeers):
-        print("a peer unsubscribed from topic [%s]" % topic_name)
+        print(f"a peer unsubscribed from topic [{topic_name}]")
         if numPeers == 0:
             print("I have no friends")
     

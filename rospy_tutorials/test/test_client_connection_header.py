@@ -60,15 +60,15 @@ class TestClientConnectionHeader(unittest.TestCase):
         y = random.randint(0, 1000)            
 
         rospy.wait_for_service('add_two_ints')
-    
+
         try:
             # initialize ServiceProxy with extra header information.
             # header is only exchanged on initial connection
-            metadata = { 'cookies' : 'peanut butter' } 
+            metadata = { 'cookies' : 'peanut butter' }
             add_two_ints = rospy.ServiceProxy('add_two_ints', AddTwoInts, headers=metadata)
 
-            print("Requesting %s+%s with cookies=%s" % (x, y, metadata['cookies']))
-        
+            print(f"Requesting {x}+{y} with cookies={metadata['cookies']}")
+
             # simplified style
             resp = add_two_ints(x, y)
             print("Server's connection headers were", resp._connection_header)
@@ -76,7 +76,7 @@ class TestClientConnectionHeader(unittest.TestCase):
 
             return resp.sum
         except rospy.ServiceException as e:
-            print("Service call failed: %s" % e)
+            print(f"Service call failed: {e}")
             raise #fail
         
 if __name__ == '__main__':

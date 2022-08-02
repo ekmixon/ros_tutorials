@@ -52,11 +52,11 @@ def param_talker():
     # fetch a /global parameter
     global_example = rospy.get_param("/global_example")
     rospy.loginfo("%s is %s", rospy.resolve_name('/global_example'), global_example)
-    
+
     # fetch the utterance parameter from our parent namespace
     utterance = rospy.get_param('utterance')
     rospy.loginfo("%s is %s", rospy.resolve_name('utterance'), utterance)
-    
+
     # fetch topic_name from the ~private namespace
     topic_name = rospy.get_param('~topic_name')
     rospy.loginfo("%s is %s", rospy.resolve_name('~topic_name'), topic_name)
@@ -64,7 +64,7 @@ def param_talker():
     # fetch a parameter, using 'default_value' if it doesn't exist
     default_param = rospy.get_param('default_param', 'default_value')
     rospy.loginfo('%s is %s', rospy.resolve_name('default_param'), default_param)
-    
+
     # fetch a group (dictionary) of parameters
     gains = rospy.get_param('gains')
     p, i, d = gains['P'], gains['I'], gains['D']
@@ -81,14 +81,17 @@ def param_talker():
     # delete a parameter
     if rospy.has_param('to_delete'):
         rospy.delete_param('to_delete')
-        rospy.loginfo("deleted %s parameter"%rospy.resolve_name('to_delete'))
+        rospy.loginfo(f"deleted {rospy.resolve_name('to_delete')} parameter")
     else:
-        rospy.loginfo('parameter %s was already deleted'%rospy.resolve_name('to_delete'))
+        rospy.loginfo(
+            f"parameter {rospy.resolve_name('to_delete')} was already deleted"
+        )
+
 
     # search for a parameter
     param_name = rospy.search_param('global_example')
-    rospy.loginfo('found global_example parameter under key: %s'%param_name)
-    
+    rospy.loginfo(f'found global_example parameter under key: {param_name}')
+
     # publish the value of utterance repeatedly
     pub = rospy.Publisher(topic_name, String, queue_size=10)
     while not rospy.is_shutdown():

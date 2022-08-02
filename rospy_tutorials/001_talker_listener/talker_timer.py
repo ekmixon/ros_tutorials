@@ -39,7 +39,7 @@ from std_msgs.msg import String
 
 
 def publish_callback(event):
-    hello_str = "hello world %s" % event.current_real.to_sec()
+    hello_str = f"hello world {event.current_real.to_sec()}"
     rospy.loginfo(hello_str)
     pub.publish(hello_str)
 

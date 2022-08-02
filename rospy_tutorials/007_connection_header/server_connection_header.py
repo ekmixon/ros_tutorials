@@ -43,10 +43,10 @@ from rospy_tutorials.srv import *
 import rospy 
 
 def add_two_ints(req):
-    print("Request from %s"%req._connection_header['callerid'])
+    print(f"Request from {req._connection_header['callerid']}")
     if 'cookies' in req._connection_header:
-        print("Request gave me %s cookies"%req._connection_header['cookies'])
-    print("Returning [%s + %s = %s]"%(req.a, req.b, (req.a + req.b)))
+        print(f"Request gave me {req._connection_header['cookies']} cookies")
+    print(f"Returning [{req.a} + {req.b} = {req.a + req.b}]")
     return AddTwoIntsResponse(req.a + req.b)
 
 def add_two_ints_server():
